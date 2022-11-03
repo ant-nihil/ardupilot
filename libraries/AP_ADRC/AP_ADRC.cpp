@@ -115,10 +115,10 @@ float AP_ADRC::update_all(float target, float measurement, bool limit)
                     float beta2 = 3 * _wo * _wo;
                     float beta3 = _wo * _wo * _wo;
                     float fe = fal(e, 0.5, _delta);
-                    float fel = fal(e, 0.25, _delta);
+                    float fe1 = fal(e, 0.25, _delta);
                     _z1 = _z1 + _dt * (_z2 - beta1 * e);
                     _z2 = _z2 + _dt * (_z3 - beta2 * fe + _b0 * output_limited);
-                    _z3 = _z3 + _dt * (- beta3 * fel);
+                    _z3 = _z3 + _dt * (- beta3 * fe1);
 
                     _pid_info.P = _z1;
                     _pid_info.I = _z2;
