@@ -86,7 +86,7 @@ float AP_ADRC::update_all(float target, float measurement, bool limit)
                     float fe = fal(e, 0.5, _delta);
                     float beta1 = 2 * _wo;
                     float beta2 = _wo * _wo;
-                    _z1 = _z1 + _dt * (_z2 -beta1 *e + _b0 * output_limited);
+                    _z1 = _z1 + _dt * (_z2 - beta1 * e + _b0 * output_limited);
                     _z2 = _z2 + _dt * (-beta2 * fe);
 
                     _pid_info.P = _z1;
@@ -101,7 +101,7 @@ float AP_ADRC::update_all(float target, float measurement, bool limit)
                     float kd = 2 * _wc;
 
                     // Nolinear control law
-                    ouput = (kp * fal(e1, 0.5f, _delta) + kd *fal(e2, 0.25, _delta) - sigma * _z3) / _b0;
+                    ouput = (kp * fal(e1, 0.5f, _delta) + kd * fal(e2, 0.25, _delta) - sigma * _z3) / _b0;
 
                     // limit output
                     if(is_zero(_limit.get())) {
@@ -134,7 +134,7 @@ float AP_ADRC::update_all(float target, float measurement, bool limit)
     // for loggers
     _pid_info.target = target;
     _pid_info.actual = measurement;
-    _pid_info.erroe = target - measurement;
+    _pid_info.error = target - measurement;
 
     return output_limited;
 }
